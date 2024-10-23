@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        let operation = '';
+
+        function startReminder() {
+            setInterval(() => {
+                alert("Please, use me...");
+            }, 30000);
+        }
+
+        function setOperation(op) {
+            operation = op;
+        }
+
+        function calculate() {
+            const l_num = document.getElementById("l_num").value;
+            const r_num = document.getElementById("r_num").value;
+
+            const left = Number(l_num);
+            const right = Number(r_num);
+
+            if (left < 0 || right < 0) {
+                alert("Error :(");
+                return;
+            }
+
+            if (!Number.isInteger(left) || !Number.isInteger(right)) {
+                alert("Error :(");
+                return;
+            }
+
+            let result;
+
+            switch (operation) {
+                case 'add':
+                    result = left + right;
+                    break;
+                case 'subtract':
+                    result = left - right;
+                    break;
+                case 'multiply':
+                    result = left * right;
+                    break;
+                    case 'divide':
+                    if (right === 0) {
+                        alert("It\’s over 9000!");
+                        return;
+                    }
+                    result = left / right;
+                    break;
+                case 'modulo':
+                    if (right === 0) {
+                        console.log("It\s over 9000!");
+                        alert("It\’s over 9000!");
+                        return;
+                    }
+                    result = left % right;
+                    break;
+                // default:
+                //     alert("Please select an operation.");
+                //     return;
+            }
+
+            console.log(result);
+            alert(result);
+        }
+
+        window.onload = startReminder;
+    </script>
+</head>
+
+<body>
+    <input type="text" id="l_num" placeholder="Left Number">
+    <button type="button" onclick="setOperation('add')">+</button>
+    <button type="button" onclick="setOperation('subtract')">-</button>
+    <button type="button" onclick="setOperation('multiply')">*</button>
+    <button type="button" onclick="setOperation('divide')">/</button>
+    <button type="button" onclick="setOperation('modulo')">%</button>
+    <input type="text" id="r_num" placeholder="Right Number">
+    <button type="button" onclick="calculate()">Try me!</button>
+</body>
+
+</html>
