@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balloon</title>
+    <style>
+        div.balloon {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            border-radius: 100px;
+            background-color: red;
+        }
+    </style>
+    <script>
+        var color_set = ['red', 'green', 'blue']
+        var cur_color_index = 0;
+        function ball_clicked() {
+            const balloon = document.querySelector('.balloon');
+
+            let cur_width = parseInt(getComputedStyle(balloon).width);
+            let cur_height = parseInt(getComputedStyle(balloon).height);
+            let cur_radius = parseInt(getComputedStyle(balloon).borderRadius);
+
+            balloon.style.width = (cur_width + 10) + 'px';
+            balloon.style.height = (cur_height + 10) + 'px';
+            balloon.style.borderRadius = (cur_radius + 5) + 'px';
+
+            cur_color_index = (cur_color_index + 1) % color_set.length;
+            balloon.style.backgroundColor = color_set[cur_color_index];
+
+            if (cur_width > 420 && cur_height > 420) {
+                balloon.style.width = '200px';
+                balloon.style.height = '200px';
+                balloon.style.borderRadius = '100px';
+            }
+        }
+
+        function ball_out() {
+            const balloon = document.querySelector('.balloon');
+
+            let cur_width = parseInt(getComputedStyle(balloon).width);
+            let cur_height = parseInt(getComputedStyle(balloon).height);
+            let cur_radius = parseInt(getComputedStyle(balloon).borderRadius);
+
+            if (cur_width > 200 && cur_height > 200) {
+                balloon.style.width = (cur_width - 5) + 'px';
+                balloon.style.height = (cur_height - 5) + 'px';
+                balloon.style.borderRadius = (parseInt(balloon.style.width) / 2) + 'px'
+            }
+
+            cur_color_index = (cur_color_index - 1 + color_set.length) % color_set.length;
+            balloon.style.backgroundColor = color_set[cur_color_index];
+        }
+    </script>
+</head>
+
+<body>
+    <div class="balloon" onclick="ball_clicked()" onmouseleave="ball_out()"></div>
+
+</body>
+
+</html>
